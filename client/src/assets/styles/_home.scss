@@ -1,0 +1,78 @@
+@import './components/home-components';
+
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+.home-background {
+  background-color: #D3BBA8;
+}
+
+// ------------------------- BANNER -------------------------
+.banner {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
+  z-index: 2;
+}
+
+.left {
+  background-image: linear-gradient(rgba(10,15,70,0.5),rgba(10,15,70,0.5)), url(https://res.cloudinary.com/mpc-cloud/image/upload/v1586645350/CoValue/nick-hillier-aQcE3gDSSTY-unsplash_wst0ij.jpg);
+  filter: grayscale(100%);
+  animation: easeInLeft 1.5s;
+}
+@keyframes easeInLeft {
+  0% { margin-left: 100vw; }
+  100% { margin-left: 0vw; }
+}
+
+.right {
+  position: absolute;
+  top: 0;
+  width: 50vw;
+  margin-left: 50vw;
+  background-image: linear-gradient(90deg, rgba(21,31,109,0.8) 0%, rgba(21,31,109,1) 40%, rgba(7,14,73,1) 100%);
+  animation: easeInRight 2.5s;
+  img {
+    position: absolute;
+    top: 50vh;
+    transform: translate(-31%, -50%);
+    height: 30%;
+    animation: easeInRightLogo 3s;
+  }
+}
+@keyframes easeInRight {
+  0% { margin-left: 100vw; }
+  100% { margin-left: 50vw; }
+}
+@keyframes easeInRightLogo {
+  0% { left: 0; transform: translateX(50%); }
+}
+// ------------------------- END BANNER -------------------------
+
+// ------------------------- INTRO -------------------------
+.section-intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  h3 {
+    text-align: center;
+    color: rgb(60, 60, 90);
+    font-weight: 300;
+    font-size: 20px;
+    margin: 0 auto;
+    width: 700px;
+  }
+}
+// ------------------------- END INTRO -------------------------
+.section-process {
+  z-index: 3;
+  height: 100vh;
+  background-color: #D3BBA8;
+  box-shadow: 0px -5px 5px 0px rgba(0,0,0,0.1);
+}
+

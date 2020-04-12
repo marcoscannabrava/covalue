@@ -1,0 +1,67 @@
+
+// -------------- Arcs --------------
+.circle {
+  position: absolute;
+  display: inline-flex;
+  overflow: hidden;
+}
+.on {
+  .circle__half {
+    height: 600px;
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .circle__half:before {
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    content: "";
+    border-radius: 300px 0 0 300px;
+    border: 40px solid rgb(151, 134, 120);
+    border-right-color: transparent;
+    // background-color: #0087cf;
+    transform-origin: 100% 50%;
+    /* hidden by default */
+    transform: rotate(180deg);
+    opacity: 0.65;
+    animation-name: rotate-circle-half;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    // animation-iteration-count: infinite;
+  }
+
+  .circle__half--right{
+    transform: scale(-1, -1);
+  }
+
+  .circle .circle__half--right:before {
+    animation-name: rotate-circle-half--right;
+  }
+  /* show half of circle half of the time */
+  @keyframes rotate-circle-half {
+    0% {
+      transform: rotate(180deg);
+    }
+    50% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes rotate-circle-half--right {
+    0% {
+      transform: rotate(180deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+}
