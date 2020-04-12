@@ -14,6 +14,7 @@ export class HomePage extends Component {
           if (entry.isIntersecting) {
             let trackedItem = entry.target;
             circles.forEach(circle => circle.classList.add("on"));
+            trackedItem.classList.add("fadeInBottom")
             observer.unobserve(trackedItem);
           }
         });

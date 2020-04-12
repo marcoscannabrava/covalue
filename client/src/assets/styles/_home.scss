@@ -60,6 +60,7 @@
   height: 100vh;
   justify-content: center;
   h3 {
+    transition: all 1s;
     text-align: center;
     color: rgb(60, 60, 90);
     font-weight: 300;
@@ -67,8 +68,21 @@
     margin: 0 auto;
     width: 700px;
   }
+  .fadeInBottom { 
+    animation-name: fadeInBottom;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+}
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to { opacity: 1 }
 }
 // ------------------------- END INTRO -------------------------
+// ------------------------- SECTION PROCESS -------------------------
 .section-process {
   z-index: 3;
   height: 100vh;
@@ -76,3 +90,4 @@
   box-shadow: 0px -5px 5px 0px rgba(0,0,0,0.1);
 }
 
+// ------------------------- END PROCESS -------------------------
