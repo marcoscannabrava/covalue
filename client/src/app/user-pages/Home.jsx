@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import logo from '../../assets/images/covalue/marca_co_amarela.png';
+import { Link } from 'react-router-dom';
 
 export class HomePage extends Component {
   
@@ -20,23 +21,11 @@ export class HomePage extends Component {
         });
       });
   
-      tracked.forEach(function(trackedItem) {
-        observer.observe(trackedItem);
-      });
+      tracked.forEach((trackedItem) => observer.observe(trackedItem));
     }
   }
 
   render() {
-    let circle_right = {
-      top: 0,
-      right: 0,
-      transform: 'translate(50%, -50%)'
-    }
-    let circle_left = {
-      bottom: 0,
-      left: 0,
-      transform: 'translate(-50%, 50%)'
-    }
     return (
       <div className="home-background">
         <section className="banner">
@@ -44,22 +33,47 @@ export class HomePage extends Component {
           <div className="banner right"><img src={logo} alt="covalue"/></div>
         </section>
         <section className="section-intro">
-          <div className="circles circle" style={circle_right}>
+          <div className="circles circle circle-right">
             <div className="circles circle__half"></div>
+          </div>
+          <div className="circles circle circle-left">
             <div className="circles circle__half circle__half--right"></div>
           </div>
-          <div className="circles circle" style={circle_left}>
-            <div className="circles circle__half"></div>
-            <div className="circles circle__half circle__half--right"></div>
+          <div className="tracker intro-tag">
+            <h3>
+              Estamos aqui para melhorar negócios.<br />
+              Com total integridade e transparência, representamos um upgrade estratégico
+              que gera valor para a sua empresa onde você não sabia que existia.
+            </h3>
+            <Link to="/dashboard"><button className="btn-cv">Clientes</button></Link>
           </div>
-          <h3 className="tracker">
-            Estamos aqui para melhorar negócios.<br />
-            Com total integridade e transparência, representamos um upgrade estratégico
-            que gera valor para a sua empresa onde você não sabia que existia.
-          </h3>
         </section>
         <section className="section-process">
-          
+          <div className="link-institucional">
+            <Link to="/institucional"><button className="btn-cv">Nossos Serviços</button></Link>
+          </div>
+          <div className="process-intro">
+            <div className="text-blurb tracker">
+              <div className="circles circle circles-process-left">
+                <div className="circles circle__half circle__half--right"></div>
+              </div>
+              <h3>PROCESSO CONSULTIVO</h3>
+              <h4>Assessoria de negócios que identifica problemas e encontra as melhores soluções para estruturar e evidenciar o potencial da empresa.</h4>
+            </div>
+            <div className="text-blurb tracker">
+              <img src="https://res.cloudinary.com/mpc-cloud/image/upload/v1586873152/CoValue/meric-dagli-kZTYGpoeQO0-unsplash_pk5kvn.jpg" alt="Office Buildings"/>
+              <p>Organizamos negócios e planejamos negociações que geram benefícios mútuos. <br />
+                Nossa atuação vai do processo consultivo ao estratégico.
+              </p>
+            </div>
+            <div className="text-blurb tracker">
+              <div className="circles circle circles-process-right">
+                <div className="circles circle__half"></div>
+              </div>
+              <h3>PROCESSO ESTRATÉGICO</h3>
+              <h4>Planejar e mediar a negociação de fusão ou aquisição mais positiva para gerar verdadeiros ganhos para todos os envolvidos.</h4>
+            </div>
+          </div>
         </section>
       </div>
     )

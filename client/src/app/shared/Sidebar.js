@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Collapse } from 'react-bootstrap';
-import { Dropdown } from 'react-bootstrap';
+// import { Dropdown } from 'react-bootstrap';
 
 class Sidebar extends Component {
   state = {};
@@ -51,13 +51,13 @@ class Sidebar extends Component {
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <div className="text-center sidebar-brand-wrapper d-flex align-items-center">
-          <a className="sidebar-brand brand-logo" href="index.html"><img src={require("../../assets/images/logo.svg")} alt="logo" /></a>
-          <a className="sidebar-brand brand-logo-mini pt-3" href="index.html"><img src={require("../../assets/images/logo-mini.svg" )} alt="logo" /></a>
+          <a className="sidebar-brand brand-logo" href="/dashboard"><img src={require("../../assets/images/covalue/marca_co_azul.png")} alt="logo" /></a>
+          <a className="sidebar-brand brand-logo-mini pt-3" href="/dashboard"><img src={require("../../assets/images/covalue/marca_co_azul_small.png" )} alt="logo" /></a>
         </div>
         <ul className="nav">
           <li className="nav-item nav-profile not-navigation-link">
             <div className="nav-link">
-              <Dropdown>
+              {/* <Dropdown>
                 <Dropdown.Toggle className="nav-link user-switch-dropdown-toggler p-0 toggle-arrow-hide bg-transparent border-0 w-100">
                   <div className="d-flex justify-content-between align-items-start">
                     <div className="profile-image">
@@ -97,11 +97,11 @@ class Sidebar extends Component {
                     Sign Out
                   </Dropdown.Item>
                 </Dropdown.Menu>
-              </Dropdown>
-              <button className="btn btn-success btn-block">New Project <i className="mdi mdi-plus"></i></button>
+              </Dropdown> */}
+              <button className="btn btn-success btn-block">Upload Spreadsheet <i className="mdi mdi-plus"></i></button>
             </div>
           </li>
-          <li className={ this.isPathActive('/dashboard') ? 'nav-item active' : 'nav-item' }>
+          {/* <li className={ this.isPathActive('/dashboard') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/dashboard">
               <i className="mdi mdi-television menu-icon"></i>
               <span className="menu-title">Dashboard</span>
@@ -126,19 +126,19 @@ class Sidebar extends Component {
               <i className="mdi mdi-format-list-bulleted menu-icon"></i>
               <span className="menu-title">Form Elements</span>
             </Link>
-          </li>
+          </li> */}
           <li className={ this.isPathActive('/tables') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/tables/basic-table">
               <i className="mdi mdi-table-large menu-icon"></i>
               <span className="menu-title">Tables</span>
             </Link>
           </li>
-          <li className={ this.isPathActive('/icons') ? 'nav-item active' : 'nav-item' }>
+          {/* <li className={ this.isPathActive('/icons') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/icons/font-awesome">
               <i className="mdi mdi-account-box-outline menu-icon"></i>
               <span className="menu-title">Icons</span>
             </Link>
-          </li>
+          </li> */}
           <li className={ this.isPathActive('/charts') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/charts/chart-js">
               <i className="mdi mdi-chart-line menu-icon"></i>
@@ -161,12 +161,12 @@ class Sidebar extends Component {
               </ul>
             </Collapse>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a className="nav-link" href="http://www.bootstrapdash.com/demo/star-admin-free/react/documentation/documentation.html" rel="noopener noreferrer" target="_blank">
               <i className="mdi mdi-file-outline menu-icon"></i>
               <span className="menu-title">Documentation</span>
             </a>
-          </li>
+          </li> */}
         </ul>
       </nav>
     );

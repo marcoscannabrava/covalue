@@ -1,4 +1,5 @@
-@import './components/home-components';
+@import './components/home-components-arcs';
+@import './components/home-components-button';
 
 * {
   font-family: 'Lato', sans-serif;
@@ -15,17 +16,13 @@
   background-position: center;
   height: 100vh;
   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
-  z-index: 2;
+  z-index: 1;
 }
 
 .left {
   background-image: linear-gradient(rgba(10,15,70,0.5),rgba(10,15,70,0.5)), url(https://res.cloudinary.com/mpc-cloud/image/upload/v1586645350/CoValue/nick-hillier-aQcE3gDSSTY-unsplash_wst0ij.jpg);
   filter: grayscale(100%);
-  animation: easeInLeft 1.5s;
-}
-@keyframes easeInLeft {
-  0% { margin-left: 100vw; }
-  100% { margin-left: 0vw; }
+  animation: easeInLeft 2.5s;
 }
 
 .right {
@@ -34,21 +31,14 @@
   width: 50vw;
   margin-left: 50vw;
   background-image: linear-gradient(90deg, rgba(21,31,109,0.8) 0%, rgba(21,31,109,1) 40%, rgba(7,14,73,1) 100%);
-  animation: easeInRight 2.5s;
+  animation: easeInRight 3s;
   img {
     position: absolute;
     top: 50vh;
     transform: translate(-31%, -50%);
     height: 30%;
-    animation: easeInRightLogo 3s;
+    animation: easeInRightLogo 3.5s;
   }
-}
-@keyframes easeInRight {
-  0% { margin-left: 100vw; }
-  100% { margin-left: 50vw; }
-}
-@keyframes easeInRightLogo {
-  0% { left: 0; transform: translateX(50%); }
 }
 // ------------------------- END BANNER -------------------------
 
@@ -59,20 +49,126 @@
   flex-direction: column;
   height: 100vh;
   justify-content: center;
-  h3 {
+  .circle-right {
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+  .circle-left {
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%) ;
+  
+  }
+  .intro-tag {
     transition: all 1s;
+    opacity: 0;
     text-align: center;
     color: rgb(60, 60, 90);
+  }
+  h3 {
     font-weight: 300;
     font-size: 20px;
     margin: 0 auto;
-    width: 700px;
+    max-width: 700px;
   }
-  .fadeInBottom { 
-    animation-name: fadeInBottom;
-    animation-duration: 1s;
-    animation-fill-mode: both;
+}
+.section-process, .section-process > * {
+  opacity: .99;
+}
+// ------------------------- END INTRO -------------------------
+
+// ------------------------- SECTION PROCESS -------------------------
+.section-process {
+  height: 100vh;
+  background-color: #D3BBA8;
+  box-shadow: 0px -5px 5px 0px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .link-institucional {
+    margin-top: 32px;
+    text-align: center;
+    display: block;
+    width: 100%;
   }
+  .process-intro {
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    align-self: center;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    :first-child {
+      z-index: 1;
+    }
+    .text-blurb {
+      position: relative;
+      width: 300px;
+      transition: all 1s;
+      opacity: 0;
+      * {
+        text-align: center;
+      }
+      img {
+        filter: grayscale(100%);
+        opacity: .4;
+        top: 50%;
+        left: 50%;
+        z-index: -1;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        object-fit: cover;
+        border-radius:50%;
+        width: 400px;
+        height: 400px;
+      }
+    }
+    // ---------- PROCESS: CIRCLES ----------
+    .circles-process-left {
+      position: absolute;
+      top: 50%;
+      left: 70%;
+      transform: translate(0, -50%);
+      .circle__half:before {
+        border: 30px solid #151F6D;
+        opacity: .8;
+      }
+    }
+    .circles-process-right {
+      position: absolute;
+      top: 50%;
+      right: 70%;
+      transform: translate(0, -50%);
+      .circle__half:before {
+        border: 30px solid #FFB81C;
+        opacity: .8;
+      }
+    }
+    .circle__half {
+      height: 500px;
+      width: 250px;
+    }
+    // ---------- END PROCESS: CIRCLES ----------
+    h3 {
+      font-weight: 500;
+      font-size: 18px;
+    }
+    p, h4 {
+      font-weight: 300;
+      font-size: 16px;
+    }
+  }
+}
+
+// ------------------------- END PROCESS -------------------------
+
+// ------------------------- ANIMATIONS -------------------------
+.fadeInBottom { 
+  animation-name: fadeInBottom;
+  animation-duration: 1s;
+  animation-fill-mode: both;
 }
 @keyframes fadeInBottom {
   from {
@@ -81,13 +177,52 @@
   }
   to { opacity: 1 }
 }
-// ------------------------- END INTRO -------------------------
-// ------------------------- SECTION PROCESS -------------------------
-.section-process {
-  z-index: 3;
-  height: 100vh;
-  background-color: #D3BBA8;
-  box-shadow: 0px -5px 5px 0px rgba(0,0,0,0.1);
+@keyframes easeInLeft {
+  0% { margin-left: 100vw; }
+  100% { margin-left: 0vw; }
+}
+@keyframes easeInRight {
+  0% { margin-left: 100vw; }
+  100% { margin-left: 50vw; }
+}
+@keyframes easeInRightLogo {
+  0% { left: 0; transform: translateX(50%); }
 }
 
-// ------------------------- END PROCESS -------------------------
+// ------------------------- RESPONSIVE MEDIA QUERIES -------------------------
+@media screen and (max-width: 400px) {
+  .banner {
+    height: 70vh;
+  }
+  .right {
+    img {
+      top: 35vh;
+      height: auto;
+      width: 50vw;
+    }
+  }
+  .section-intro {
+    height: 30vh;
+  }
+  .section-intro h3, .circles, .circles-process-left, .circles-process-right {
+    display: none;
+  }
+  .section-process {
+    height: 80vh;
+    .link-institucional {
+      margin-top: 16px;
+    }
+  }
+  .process-intro {
+    flex-direction: column;
+    > * {
+      padding-top: 16px;
+    }
+    .text-blurb {
+      img {
+        height: 600px;
+        width: 600px;
+      }
+    } 
+  }
+}
