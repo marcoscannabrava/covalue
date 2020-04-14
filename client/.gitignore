@@ -5,10 +5,10 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore build.
-/client/build
+build/
 
 # Ignore all logfiles and tempfiles.
-client/node_modules
+node_modules/
 
 # Ignore .env file containing credentials.
 .env*

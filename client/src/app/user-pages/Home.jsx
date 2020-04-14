@@ -49,7 +49,7 @@ export class HomePage extends Component {
           </div>
         </section>
         <section className="section-process">
-          <div className="link-institucional">
+          <div className="link-institucional tracker">
             <Link to="/institucional"><button className="btn-cv">Nossos Serviços</button></Link>
           </div>
           <div className="process-intro">
