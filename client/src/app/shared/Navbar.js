@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'react-bootstrap';
+import { withFirebase } from '../Firebase';
 
 class Navbar extends Component {
   toggleOffcanvas() {
     document.querySelector('.sidebar-offcanvas').classList.toggle('active');
   }
   render () { 
+    const firebase = this.props.firebase;
+
     return (
       <nav className="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
         <div className="navbar-menu-wrapper d-flex align-items-center justify-content-between">
@@ -142,7 +145,7 @@ class Navbar extends Component {
                   <Dropdown.Item className="dropdown-item preview-item d-flex align-items-center border-0" onClick={evt =>evt.preventDefault()}>
                     Check Inbox
                   </Dropdown.Item>
-                  <Dropdown.Item className="dropdown-item preview-item d-flex align-items-center border-0" onClick={evt =>evt.preventDefault()}>
+                  <Dropdown.Item className="dropdown-item preview-item d-flex align-items-center border-0" onClick={firebase.doSignOut}>
                     Sign Out
                   </Dropdown.Item>
                 </Dropdown.Menu>
@@ -158,4 +161,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default withFirebase(Navbar);

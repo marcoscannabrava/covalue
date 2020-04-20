@@ -4,6 +4,10 @@ import './App.scss';
 import AppRoutes from './AppRoutes';
 import Navbar from './shared/Navbar';
 import Sidebar from './shared/Sidebar';
+import { compose } from 'recompose';
+
+
+import { withAuthentication } from './Session';
 
 // import Footer from './shared/Footer';
 
@@ -16,7 +20,9 @@ class App extends Component {
   render () {
     let navbarComponent = !this.state.isFullPageLayout ? <Navbar/> : '';
     let sidebarComponent = !this.state.isFullPageLayout ? <Sidebar/> : '';
+        
     // let footerComponent = !this.state.isFullPageLayout ? <Footer/> : '';
+
     return (
       <div className="container-scroller">
         { navbarComponent }
@@ -30,7 +36,7 @@ class App extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 
   componentDidUpdate(prevProps) {
@@ -41,8 +47,10 @@ class App extends Component {
 
   onRouteChanged() {
     console.log("ROUTE CHANGED");
+    console.log(this.props);
+    console.log(process.env);
     window.scrollTo(0, 0);
-    const fullPageLayoutRoutes = ['/user-pages/login-1', '/user-pages/login-2', '/user-pages/register-1', '/user-pages/register-2', '/user-pages/lockscreen', '/error-pages/error-404', '/error-pages/error-500', '/general-pages/landing-page'];
+    const fullPageLayoutRoutes = ['/', '/signin', '/signup', '/error-pages/error-404', '/error-pages/error-500'];
     for ( let i = 0; i < fullPageLayoutRoutes.length; i++ ) {
       if (this.props.location.pathname === fullPageLayoutRoutes[i]) {
         this.setState({
@@ -61,4 +69,7 @@ class App extends Component {
 
 }
 
-export default withRouter(App);
+export default compose(
+  withAuthentication, 
+  withRouter
+)(App);

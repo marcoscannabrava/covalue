@@ -3,7 +3,7 @@ import { Line, Doughnut, Bar } from 'react-chartjs-2';
 import { Sparklines, SparklinesBars } from 'react-sparklines';
 import { ProgressBar, Dropdown } from 'react-bootstrap';
 
-import { withAuthorization } from '../Session';
+import { withAuthorization, withEmailVerification } from '../../Session';
 import { compose } from 'recompose';
 
 // import DatePicker from 'react-datepicker';
@@ -407,8 +407,8 @@ toggleProBanner() {
                     <div className="badge badge-success">3:45 AM</div>
                     <small className="text-muted ml-2">London, UK</small>
                     <div className="image-grouped ml-auto mt-2 mt-xl-0">
-                      <img src={require("../../assets/images/faces/face10.jpg")} alt="profile" />
-                      <img src={require("../../assets/images/faces/face13.jpg")} alt="profile" /> </div>
+                      <img src={require("../../../assets/images/faces/face10.jpg")} alt="profile" />
+                      <img src={require("../../../assets/images/faces/face13.jpg")} alt="profile" /> </div>
                   </div>
                 </div>
                 <div className="event py-3 border-bottom">
@@ -417,9 +417,9 @@ toggleProBanner() {
                     <div className="badge badge-warning">12.30 AM</div>
                     <small className="text-muted ml-2">San Francisco, CA</small>
                     <div className="image-grouped ml-auto mt-2 mt-xl-0">
-                      <img src={require("../../assets/images/faces/face20.jpg")} alt="profile "/>
-                      <img src={require("../../assets/images/faces/face17.jpg")} alt="profile "/>
-                      <img src={require("../../assets/images/faces/face14.jpg")} alt="profile " /> </div>
+                      <img src={require("../../../assets/images/faces/face20.jpg")} alt="profile "/>
+                      <img src={require("../../../assets/images/faces/face17.jpg")} alt="profile "/>
+                      <img src={require("../../../assets/images/faces/face14.jpg")} alt="profile " /> </div>
                   </div>
                 </div>
                 <div className="event py-3">
@@ -428,8 +428,8 @@ toggleProBanner() {
                     <div className="badge badge-danger">4.15 AM</div>
                     <small className="text-muted ml-2">San Diego, CA</small>
                     <div className="image-grouped ml-auto mt-2 mt-xl-0">
-                      <img src={require("../../assets/images/faces/face21.jpg")} alt="profile"/>
-                      <img src={require("../../assets/images/faces/face16.jpg")} alt="profile" /> </div>
+                      <img src={require("../../../assets/images/faces/face21.jpg")} alt="profile"/>
+                      <img src={require("../../../assets/images/faces/face16.jpg")} alt="profile" /> </div>
                   </div>
                 </div>
               </div>
@@ -664,7 +664,7 @@ toggleProBanner() {
                 <div className="fluid-container">
                   <div className="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
                     <div className="col-md-1">
-                      <img className="img-sm rounded-circle mb-4 mb-md-0 d-block mx-md-auto" src={require("../../assets/images/faces/face1.jpg")} alt="profile" /> </div>
+                      <img className="img-sm rounded-circle mb-4 mb-md-0 d-block mx-md-auto" src={require("../../../assets/images/faces/face1.jpg")} alt="profile" /> </div>
                     <div className="ticket-details col-md-9">
                       <div className="d-lg-flex">
                         <p className="text-dark font-weight-semibold mr-2 mb-0 no-wrap">James :</p>
@@ -709,7 +709,7 @@ toggleProBanner() {
                   </div>
                   <div className="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
                     <div className="col-md-1">
-                      <img className="img-sm rounded-circle mb-4 mb-md-0 d-block mx-md-auto" src={require("../../assets/images/faces/face2.jpg")} alt="profile" /> </div>
+                      <img className="img-sm rounded-circle mb-4 mb-md-0 d-block mx-md-auto" src={require("../../../assets/images/faces/face2.jpg")} alt="profile" /> </div>
                     <div className="ticket-details col-md-9">
                       <div className="d-lg-flex">
                         <p className="text-dark font-weight-semibold mr-2 mb-0 no-wrap">Stella :</p>
@@ -754,7 +754,7 @@ toggleProBanner() {
                   </div>
                   <div className="row ticket-card mt-3">
                     <div className="col-md-1">
-                      <img className="img-sm rounded-circle mb-4 mb-md-0 d-block mx-md-auto" src={require("../../assets/images/faces/face3.jpg")} alt="profile" /> </div>
+                      <img className="img-sm rounded-circle mb-4 mb-md-0 d-block mx-md-auto" src={require("../../../assets/images/faces/face3.jpg")} alt="profile" /> </div>
                     <div className="ticket-details col-md-9">
                       <div className="d-lg-flex">
                         <p className="text-dark font-weight-semibold mr-2 mb-0 no-wrap">John Doe :</p>
@@ -825,5 +825,6 @@ const ListItem = (props) => {
 const condition = authUser => !!authUser;
 
 export default compose(
-  withAuthorization(condition)
+  withAuthorization(condition), 
+  // withEmailVerification
 )(Dashboard);

@@ -1,32 +1,24 @@
 import React, { Component,Suspense, lazy } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-
-import { withAuthentication } from './Session';
+import { Switch, Route } from 'react-router-dom';
+import Home from './user-pages/Home.jsx';
 
 import Spinner from '../app/shared/Spinner';
 
-const Dashboard = lazy(() => import('./dashboard/Dashboard.jsx'));
-
-const Buttons = lazy(() => import('./basic-ui/Buttons'));
-const Dropdowns = lazy(() => import('./basic-ui/Dropdowns'));
-const Typography = lazy(() => import('./basic-ui/Typography'));
-
-const BasicElements = lazy(() => import('./form-elements/BasicElements'));
-
-const BasicTable = lazy(() => import('./tables/BasicTable'));
-
-const FontAwesome = lazy(() => import('./icons/FontAwesome'));
-
-
-const ChartJs = lazy(() => import('./charts/ChartJs'));
-
+const Dashboard = lazy(() => import('./components/dashboard/Dashboard.jsx'));
+const Login = lazy(() => import('./user-pages/Login'));
+const Signup = lazy(() => import('./user-pages/SignUp'));
 const Error404 = lazy(() => import('./user-pages/Error404'));
 const Error500 = lazy(() => import('./user-pages/Error500'));
-
-const Login = lazy(() => import('./user-pages/Login'));
-const Register1 = lazy(() => import('./user-pages/Register'));
-
 const BlankPage = lazy(() => import('./user-pages/BlankPage'));
+
+// const Buttons = lazy(() => import('./components/basic-ui/Buttons'));
+// const Dropdowns = lazy(() => import('./components/basic-ui/Dropdowns'));
+// const Typography = lazy(() => import('./components/basic-ui/Typography'));
+// const BasicElements = lazy(() => import('./components/form-elements/BasicElements'));
+// const BasicTable = lazy(() => import('./components/tables/BasicTable'));
+// const FontAwesome = lazy(() => import('./icons/FontAwesome'));
+// const ChartJs = lazy(() => import('./components/charts/ChartJs'));
+
 
 
 class AppRoutes extends Component {
@@ -34,8 +26,18 @@ class AppRoutes extends Component {
     return (
       <Suspense fallback={<Spinner/>}>
         <Switch>
+          <Route exact path="/" component={ Home } />
+
           <Route exact path="/dashboard" component={ Dashboard } />
 
+          <Route path="/signin" component={ Login } />
+          <Route path="/signup" component={ Signup } />
+
+          <Route path="/user-pages/error-404" component={ Error404 } />
+          <Route path="/user-pages/error-500" component={ Error500 } />
+
+          <Route path="/user-pages/blank-page" component={ BlankPage } />
+{/* 
           <Route path="/basic-ui/buttons" component={ Buttons } />
           <Route path="/basic-ui/dropdowns" component={ Dropdowns } />
           <Route path="/basic-ui/typography" component={ Typography } />
@@ -47,22 +49,11 @@ class AppRoutes extends Component {
           <Route path="/icons/font-awesome" component={ FontAwesome } />
 
           <Route path="/charts/chart-js" component={ ChartJs } />
-
-
-          <Route path="/user-pages/login-1" component={ Login } />
-          <Route path="/user-pages/register-1" component={ Register1 } />
-
-          <Route path="/user-pages/error-404" component={ Error404 } />
-          <Route path="/user-pages/error-500" component={ Error500 } />
-
-          <Route path="/user-pages/blank-page" component={ BlankPage } />
-
-
-          <Redirect to="/home" />
+ */}
         </Switch>
       </Suspense>
     );
   }
 }
 
-export default withAuthentication(AppRoutes);
+export default AppRoutes;
