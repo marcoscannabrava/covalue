@@ -3,6 +3,9 @@ import { Line, Doughnut, Bar } from 'react-chartjs-2';
 import { Sparklines, SparklinesBars } from 'react-sparklines';
 import { ProgressBar, Dropdown } from 'react-bootstrap';
 
+import { withAuthorization } from '../Session';
+import { compose } from 'recompose';
+
 // import DatePicker from 'react-datepicker';
 // import { Dropdown } from 'react-bootstrap';
 
@@ -818,4 +821,9 @@ const ListItem = (props) => {
       </li>
   )
 };
-export default Dashboard;
+
+const condition = authUser => !!authUser;
+
+export default compose(
+  withAuthorization(condition)
+)(Dashboard);

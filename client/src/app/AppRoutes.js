@@ -1,6 +1,8 @@
 import React, { Component,Suspense, lazy } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import { withAuthentication } from './Session';
+
 import Spinner from '../app/shared/Spinner';
 
 const Dashboard = lazy(() => import('./dashboard/Dashboard.jsx'));
@@ -63,4 +65,4 @@ class AppRoutes extends Component {
   }
 }
 
-export default AppRoutes;
+export default withAuthentication(AppRoutes);

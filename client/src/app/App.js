@@ -4,7 +4,9 @@ import './App.scss';
 import AppRoutes from './AppRoutes';
 import Navbar from './shared/Navbar';
 import Sidebar from './shared/Sidebar';
+
 // import Footer from './shared/Footer';
+
 
 class App extends Component {
   state = {}
