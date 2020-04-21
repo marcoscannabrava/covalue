@@ -5,6 +5,7 @@ import Home from './user-pages/Home.jsx';
 import Spinner from '../app/shared/Spinner';
 
 const Dashboard = lazy(() => import('./components/dashboard/Dashboard.jsx'));
+const FileUpload = lazy(() => import('./components/file_upload/FileUpload.jsx'));
 const Login = lazy(() => import('./user-pages/Login'));
 const Signup = lazy(() => import('./user-pages/SignUp'));
 const Error404 = lazy(() => import('./user-pages/Error404'));
@@ -16,7 +17,7 @@ const BlankPage = lazy(() => import('./user-pages/BlankPage'));
 // const Typography = lazy(() => import('./components/basic-ui/Typography'));
 // const BasicElements = lazy(() => import('./components/form-elements/BasicElements'));
 // const BasicTable = lazy(() => import('./components/tables/BasicTable'));
-// const FontAwesome = lazy(() => import('./icons/FontAwesome'));
+const FontAwesome = lazy(() => import('./icons/FontAwesome'));
 // const ChartJs = lazy(() => import('./components/charts/ChartJs'));
 
 
@@ -29,6 +30,8 @@ class AppRoutes extends Component {
           <Route exact path="/" component={ Home } />
 
           <Route exact path="/dashboard" component={ Dashboard } />
+          <Route exact path="/upload" component={ FileUpload } />
+          <Route path="/icons/font-awesome" component={ FontAwesome } />
 
           <Route path="/signin" component={ Login } />
           <Route path="/signup" component={ Signup } />
