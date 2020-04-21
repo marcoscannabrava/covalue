@@ -47,8 +47,6 @@ class App extends Component {
 
   onRouteChanged() {
     console.log("ROUTE CHANGED");
-    console.log(this.props);
-    console.log(process.env);
     window.scrollTo(0, 0);
     const fullPageLayoutRoutes = ['/', '/signin', '/signup', '/error-pages/error-404', '/error-pages/error-500'];
     for ( let i = 0; i < fullPageLayoutRoutes.length; i++ ) {

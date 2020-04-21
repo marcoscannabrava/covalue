@@ -3,7 +3,7 @@ import { Line, Doughnut, Bar } from 'react-chartjs-2';
 import { Sparklines, SparklinesBars } from 'react-sparklines';
 import { ProgressBar, Dropdown } from 'react-bootstrap';
 
-import { withAuthorization, withEmailVerification } from '../../Session';
+import { withAuthorization } from '../../Session';
 import { compose } from 'recompose';
 
 // import DatePicker from 'react-datepicker';

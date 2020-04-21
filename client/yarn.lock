@@ -9545,6 +9545,13 @@ react-error-overlay@^6.0.3:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
 
+react-file-drop@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/react-file-drop/-/react-file-drop-3.0.6.tgz#7fb75bdc0e9a10be4f6c653d2a906cacdd460d3e"
+  integrity sha512-OXfSpA8YY/OsKNITXPAOr+Rar8izqNZkx/N7B5vkp00AhQOFvj8ctC4bWInq1Mzpm4De5+XfpXAYbj4D4ze1QA==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-input-autosize@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.2.2.tgz#fcaa7020568ec206bc04be36f4eb68e647c4d8c2"

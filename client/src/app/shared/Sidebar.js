@@ -3,6 +3,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { Collapse } from 'react-bootstrap';
 // import { Dropdown } from 'react-bootstrap';
 
+import * as ROUTES from '../../constants/routes';
+
 class Sidebar extends Component {
   state = {};
 
@@ -45,8 +47,11 @@ class Sidebar extends Component {
         this.setState({[obj.state] : true})
       }
     }));
- 
-  } 
+  }
+
+  buttonCall() {
+    console.log('drag n drop');
+  }
   render () {
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
@@ -98,7 +103,7 @@ class Sidebar extends Component {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown> */}
-              <button className="btn btn-success btn-block">Upload Spreadsheet <i className="mdi mdi-plus"></i></button>
+              <button className="btn btn-success btn-block" onClick={e => this.props.history.push(ROUTES.UPLOAD)}>Upload Spreadsheet <i className="mdi mdi-plus"></i></button>
             </div>
           </li>
           {/* <li className={ this.isPathActive('/dashboard') ? 'nav-item active' : 'nav-item' }>
