@@ -109,7 +109,7 @@ class SignInFormBase extends Component {
                   </div>
 
                   <div className="text-center mt-4 font-weight-light">
-                    Don't have an account? <Link to="/user-pages/signup" className="text-primary">Create</Link>
+                    Don't have an account? <Link to="/signup" className="text-primary">Create</Link>
                   </div>
                   {error && <p>{error.message}</p>}
                 </Form>

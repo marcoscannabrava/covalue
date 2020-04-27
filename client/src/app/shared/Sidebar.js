@@ -49,9 +49,6 @@ class Sidebar extends Component {
     }));
   }
 
-  buttonCall() {
-    console.log('drag n drop');
-  }
   render () {
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">

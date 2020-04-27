@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withAuthorization } from '../../Session';
 import { compose } from 'recompose';
 
+import axios from 'axios';
+
 import { FileDrop } from 'react-file-drop';
 
 export class FileUpload extends Component {
@@ -11,6 +13,14 @@ export class FileUpload extends Component {
     this.state = {};
   }
   
+  sendFile(file) {
+    axios.post("http://localhost:8000/upload", file, { // receive two parameter endpoint url ,form data 
+      })
+      .then(res => { // then print response status
+        console.log(res.statusText)
+      })
+  }
+
   fileUpload(file) {
     this.setState(file);
   }
@@ -20,18 +30,15 @@ export class FileUpload extends Component {
     this.fileUpload(event.target.files)
   }
   
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.state);
+  }
+
   render () {
     return (
       <div>
         <div className="card">
-          <FileDrop
-            // onFrameDragEnter={(event) => console.log('onFrameDragEnter', event)}
-            // onFrameDragLeave={(event) => console.log('onFrameDragLeave', event)}
-            // onFrameDrop={(event) => console.log('onFrameDrop', event)}
-            // onDragOver={(event) => console.log('onDragOver', event)}
-            // onDragLeave={(event) => console.log('onDragLeave', event)}
-            onDrop={(files, event) => this.fileUpload(files)}
-          >
+          <FileDrop onDrop={(files, event) => this.fileUpload(files)}>
             Drop your Excel Sheet here.
             <label htmlFor="file" className="btn-upload">
               <input type="file" className="file-input" id="file" onChange={(event) => this.inputFileUpload(event)}/>
