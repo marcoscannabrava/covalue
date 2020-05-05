@@ -14,24 +14,24 @@ export class FileUpload extends Component {
   }
   
   sendFile(file) {
-    axios.post("http://localhost:8000/upload", file, { // receive two parameter endpoint url ,form data 
-      })
-      .then(res => { // then print response status
-        console.log(res.statusText)
+    const data = new FormData();
+    data.append('file', file);
+    console.log(file);
+    console.log('data uploaded', data)
+    axios.post("http://localhost:8000/tables/upload", data, { // receive two parameter endpoint url ,form data 
+      }).then(res => { // then print response status
+        console.log(res)
       })
   }
 
   fileUpload(file) {
     this.setState(file);
+    this.sendFile(file[0]);
   }
 
   inputFileUpload(event) {
     event.persist();
     this.fileUpload(event.target.files)
-  }
-  
-  componentDidUpdate(prevProps, prevState) {
-    console.log(this.state);
   }
 
   render () {
