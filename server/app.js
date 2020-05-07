@@ -6,8 +6,6 @@ var cors = require('cors');
 // const port = 3000;
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var tablesRouter = require('./routes/tables');
 
 var app = express();
 
@@ -19,7 +17,5 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/tables', tablesRouter);
 
 module.exports = app;
