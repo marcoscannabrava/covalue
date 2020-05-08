@@ -1,0 +1,11 @@
+{
+  "name": "covalue",
+  "engines": {
+    "node": "12.16.x",
+    "yarn": "1.22.x"
+  },
+  "scripts": {
+    "build": "cd client && yarn && yarn build && cd ../server && yarn && yarn start",
+    "start": ""
+  }
+}
