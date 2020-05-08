@@ -1,21 +1,46 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
-// const port = 3000;
+var express = require('express'),
+    path = require('path'),
+    cookieParser = require('cookie-parser'),
+    logger = require('morgan'),
+    cors = require('cors'),
+    session = require('express-session'),
+    mongoose = require('mongoose'),
+    { errorCatch, devErrorHandler, prodErrorHandler } = require('./errorHandlers');
 
-var indexRouter = require('./routes/index');
+var isProduction = process.env.NODE_ENV === 'production';
 
 var app = express();
 
+// Middleware
 app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
-app.use('/', indexRouter);
+/// Connection to MongoDB 
+if(isProduction){
+  mongoose.connect(process.env.MONGODB_URI);
+} else {
+  mongoose.connect('mongodb://172.22.0.3:27017/test');
+  mongoose.set('debug', true);
+}
 
-module.exports = app;
+// Models
+require('./models/User');
+
+// Routes
+app.use(require('./routes/index'));
+
+// Error Handlers
+app.use(errorCatch);
+!isProduction ? app.use(devErrorHandler) : app.use(prodErrorHandler)
+
+//  Get port from environment and store in Express.
+var port = process.env.PORT || '8000';
+
+app.listen(port, () => {
+  console.log(`Listening at http://localhost:${port}`)
+})
