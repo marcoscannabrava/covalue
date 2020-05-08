@@ -16,9 +16,7 @@ export class FileUpload extends Component {
   sendFile(file) {
     const data = new FormData();
     data.append('file', file);
-    console.log(file);
-    console.log('data uploaded', data)
-    axios.post("http://localhost:8000/tables/upload", data, { // receive two parameter endpoint url ,form data 
+    axios.post("/api/upload", data, { // receive two parameter endpoint url ,form data 
       }).then(res => { // then print response status
         console.log(res)
       })

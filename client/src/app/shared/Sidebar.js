@@ -130,10 +130,17 @@ class Sidebar extends Component {
             </Link>
           </li> */}
           <li className={ this.isPathActive('/tables') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/tables/basic-table">
+            <div className={ this.state.userPagesMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('userPagesMenuOpen') } data-toggle="collapse">
               <i className="mdi mdi-table-large menu-icon"></i>
               <span className="menu-title">Tables</span>
-            </Link>
+              <i className="menu-arrow"></i>
+            </div>
+            <Collapse in={ this.state.userPagesMenuOpen }>
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item"> <Link className={ this.isPathActive('/tables/base') ? 'nav-link active' : 'nav-link' } to="/tables/base">Base</Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/tables/examples') ? 'nav-link active' : 'nav-link' } to="/tables/examples">Example Tables</Link></li>
+              </ul>
+            </Collapse>
           </li>
           {/* <li className={ this.isPathActive('/icons') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/icons/font-awesome">
