@@ -1,31 +1,10 @@
 var router = require('express').Router();
-var multer = require('multer');
-
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-  cb(null, 'public/files')
-},
-filename: function (req, file, cb) {
-  cb(null, Date.now() + '-' +file.originalname )
-}
-})
-
-var upload = multer({ storage: storage }).single('file')
+var { upload, listAccRecords } = require('../../controllers/tables');
 
 /* GET tables listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/base', listAccRecords);
 
-router.post('/upload',function(req, res) {
-  upload(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      return res.status(500).json(err)
-    } else if (err) {
-      return res.status(500).json(err)
-    }
-    return res.status(200).send(req.file)
-  })
-});
+// Upload file to public/files, creates model AccRecord and others
+router.post('/upload', upload);
 
 module.exports = router;

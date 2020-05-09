@@ -16,7 +16,8 @@ const BlankPage = lazy(() => import('./user-pages/BlankPage'));
 // const Dropdowns = lazy(() => import('./components/basic-ui/Dropdowns'));
 // const Typography = lazy(() => import('./components/basic-ui/Typography'));
 // const BasicElements = lazy(() => import('./components/form-elements/BasicElements'));
-// const BasicTable = lazy(() => import('./components/tables/BasicTable'));
+const BasicTable = lazy(() => import('./components/tables/BasicTable'));
+const AccRecords = lazy(() => import('./components/tables/AccRecords'));
 const FontAwesome = lazy(() => import('./icons/FontAwesome'));
 // const ChartJs = lazy(() => import('./components/charts/ChartJs'));
 
@@ -32,6 +33,7 @@ class AppRoutes extends Component {
           <Route exact path="/dashboard" component={ Dashboard } />
           <Route exact path="/upload" component={ FileUpload } />
           <Route path="/icons/font-awesome" component={ FontAwesome } />
+          <Route path="/tables/basic-table" component={ AccRecords } />
 
           <Route path="/signin" component={ Login } />
           <Route path="/signup" component={ Signup } />
@@ -47,7 +49,7 @@ class AppRoutes extends Component {
 
           <Route path="/form-Elements/basic-elements" component={ BasicElements } />
 
-          <Route path="/tables/basic-table" component={ BasicTable } />
+          
 
           <Route path="/icons/font-awesome" component={ FontAwesome } />
 

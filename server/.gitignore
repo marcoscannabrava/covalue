@@ -62,3 +62,6 @@ typings/
 
 # files storage folder
 public/files
+
+# vscode debug config
+.vscode

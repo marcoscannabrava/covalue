@@ -24,12 +24,13 @@ app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, s
 if(isProduction){
   mongoose.connect(process.env.MONGODB_URI);
 } else {
-  mongoose.connect('mongodb://172.22.0.3:27017/test');
+  mongoose.connect('mongodb://localhost:27017', { user: 'root', pass: 'example', useNewUrlParser: true });
   mongoose.set('debug', true);
 }
 
 // Models
 require('./models/User');
+require('./models/AccRecord');
 
 // Routes
 app.use(require('./routes/index'));
