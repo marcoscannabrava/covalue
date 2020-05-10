@@ -29,30 +29,23 @@ class AppRoutes extends Component {
       <Suspense fallback={<Spinner/>}>
         <Switch>
           <Route exact path="/" component={ Home } />
-
           <Route exact path="/dashboard" component={ Dashboard } />
           <Route exact path="/upload" component={ FileUpload } />
+          <Route path="/tables/base" component={ AccRecords } />
+          <Route path="/tables/examples" component={ BasicTable } />
           <Route path="/icons/font-awesome" component={ FontAwesome } />
-          <Route path="/tables/basic-table" component={ AccRecords } />
 
           <Route path="/signin" component={ Login } />
           <Route path="/signup" component={ Signup } />
-
           <Route path="/user-pages/error-404" component={ Error404 } />
           <Route path="/user-pages/error-500" component={ Error500 } />
-
           <Route path="/user-pages/blank-page" component={ BlankPage } />
 {/* 
           <Route path="/basic-ui/buttons" component={ Buttons } />
           <Route path="/basic-ui/dropdowns" component={ Dropdowns } />
           <Route path="/basic-ui/typography" component={ Typography } />
-
           <Route path="/form-Elements/basic-elements" component={ BasicElements } />
-
-          
-
           <Route path="/icons/font-awesome" component={ FontAwesome } />
-
           <Route path="/charts/chart-js" component={ ChartJs } />
  */}
         </Switch>

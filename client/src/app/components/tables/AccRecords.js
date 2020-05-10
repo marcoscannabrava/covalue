@@ -1,31 +1,13 @@
 import React, { Component } from 'react'
-import { ProgressBar } from 'react-bootstrap';
 
 import axios from 'axios';
 
-export class BasicTable extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      records: [{}]
-    };
-  }
-
-  componentDidMount() {
-    axios.get("http://localhost:8000/api/base")
-    .then(res => {
-      console.log(res);
-      this.setState({records: res.data.records});
-    })
-  }
-
-  render() {
-    console.log('state', this.state.records)
+function AccRecordsTable(props) {
+  if (props.records.length > 0) {
     return (
       <div>
         <div className="page-header">
-          <h3 className="page-title"> Accouting Records </h3>
+          <h3 className="page-title"> Accounting Records </h3>
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
               <li className="breadcrumb-item"><a href="!#" onClick={event => event.preventDefault()}>Tables</a></li>
@@ -43,7 +25,7 @@ export class BasicTable extends Component {
                   <table className="table table-bordered">
                     <thead>
                       <tr>
-                        {Object.keys(this.state.records[0]).map((key, i) => {
+                        {Object.keys(props.records[0]).map((key, i) => {
                           return (
                           <th key={i}>{key}</th>
                           )
@@ -51,7 +33,7 @@ export class BasicTable extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                        {this.state.records.splice(0,100).map((record, i) => {
+                        {props.records.splice(0,100).map((record, i) => {
                           return (
                             <tr key={i+20}>
                             {Object.keys(record).map((key, i) => {
@@ -71,7 +53,39 @@ export class BasicTable extends Component {
         </div>
       </div>
     )
+  } else {
+    return (
+      <div className="card card-statistics">
+        <div className="card-body">
+          <h3 className="font-weight-medium text-right mb-0 text-dark">No Accounting Records Table Uploaded</h3>
+        </div>
+      </div>
+    )
   }
 }
 
-export default BasicTable
+export class AccRecords extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      records: []
+    };
+  }
+
+  componentDidMount() {
+    axios.get("http://localhost:8000/api/base")
+    .then(res => {
+      console.log('server response: ', res);
+      this.setState({records: res.data.records});
+    })
+  }
+
+  render() {
+    return (
+      <AccRecordsTable records={this.state.records} />
+    )
+  }
+}
+
+export default AccRecords
