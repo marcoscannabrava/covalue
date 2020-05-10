@@ -22,4 +22,5 @@ AccRecordSchema.path('value').set(function(num) {
   return num * 100;
 });
 
+
 mongoose.model('AccRecord', AccRecordSchema);
