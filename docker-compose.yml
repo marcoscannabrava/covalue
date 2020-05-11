@@ -11,10 +11,11 @@ services:
   
   backend:
     build: ./server
+    restart: always
     volumes: # mount ./server to /app for nodemon in development
       - ./server:/app
     ports:
-      - 8080:8080 # change to 80:80 in production
+      - 8000:8000 # change to 80:80 in production?
     depends_on:
       - mongo
 

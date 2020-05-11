@@ -1,0 +1,82 @@
+// mongoose = require('mongoose')
+
+// Works outside container
+// async function connectWithRetry(mongoUrl) {
+//   try {
+//     await mongoose.connect(mongoUrl, { useNewUrlParser: true });
+//   }
+//   catch (err) {
+//     console.error('\n\nFailed to connect to MongoDB on startup - retrying in 5 sec\n', err);
+//     setTimeout(() => {connectWithRetry(mongoUrl)}, 5000);
+//   }
+// };
+
+// Attempt #2: creates Unhandled Promise
+// class Mongoose {
+// 	constructor() {
+// 		this.count = 0;
+// 	}
+// 	connectWithRetry(url, options = { useNewUrlParser: true }) {
+// 		mongoose.connect(url, options, function (err, db) {
+// 			if (!err) {
+// 				console.log("We are connected");
+// 				db.on('close', function () {
+// 					console.log('Close + ' + count);
+// 				})
+// 				db.on('reconnect', function () {
+// 					console.log('Reconnect')
+// 				})
+// 			}
+// 			else {
+// 				setTimeout(connectWithRetry, 5000);
+// 				this.count++;
+// 				console.log('Database not connected: ' + count);
+// 			}
+// 		});
+// 	}
+// 	setDebug() {
+// 		mongoose.set('debug', true);
+// 	}
+// }
+
+
+
+// import mongoose from 'mongoose';
+
+// mongoose.Promise = Promise; // Set mongoose to use ES6 Promises.
+
+// const dbURI = 'mongodb://127.0.0.1:27017/myDb';
+// const reconnectTimeout = 5000; // ms.
+
+// function connect() {
+//   mongoose.connect(dbURI, { auto_reconnect: true })
+// 	.catch(() => {}); 
+// 	// Catch the warning, no further treatment is required because the Connection events are already doing this.
+// }
+
+// const db = mongoose.connection;
+
+// db.on('connecting', () => {
+//   console.info('Connecting to MongoDB...');
+// });
+
+// db.on('error', (error) => {
+//   console.error(`MongoDB connection error: ${error}`);
+//   mongoose.disconnect();
+// });
+
+// db.on('connected', () => {
+//   console.info('Connected to MongoDB!');
+// });
+
+// db.once('open', () => {
+//   console.info('MongoDB connection opened!');
+// });
+
+// db.on('reconnected', () => {
+//   console.info('MongoDB reconnected!');
+// });
+
+// connect();
+
+// module.exports = mongoose;

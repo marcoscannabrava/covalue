@@ -20,20 +20,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
-/// Connection to MongoDB 
-async function connectWithRetry(mongoUrl) {
-  try {
-    await mongoose.connect(mongoUrl, { useNewUrlParser: true });
-  }
-  catch (err) {
-    console.error('\n\nFailed to connect to MongoDB on startup - retrying in 5 sec\n', err);
-    setTimeout(() => {connectWithRetry(mongoUrl)}, 5000);
-  }
-};
+/// Connection to MongoDB
+let options = {
+  useUnifiedTopology: true,
+  useNewUrlParser: true
+}
 if(isProduction){
-  connectWithRetry(process.env.MONGODB_URI);
+  mongoose.connect(process.env.MONGODB_URI, options).catch(err => console.log('\n\nError on Connecting to MongoDB (Production Environment):\n', err));
 } else {
-  connectWithRetry('mongodb://root:example@localhost:27017');
+  mongoose.connect('mongodb://root:example@mongo:27017', options).catch(err => console.log('\n\nError on Connecting to MongoDB (Dev Environment):\n', err));
   mongoose.set('debug', true);
 }
 
@@ -42,11 +37,12 @@ require('./models/User');
 require('./models/AccRecord');
 
 // Routes
-app.use(require('./routes/index'));
+app.use(require('./routes'));
 
 // Error Handlers
 app.use(errorCatch);
-!isProduction ? app.use(devErrorHandler) : app.use(prodErrorHandler)
+if (!isProduction) app.use(devErrorHandler)
+app.use(prodErrorHandler)
 
 //  Get port from environment and store in Express.
 var port = process.env.PORT || '8000';

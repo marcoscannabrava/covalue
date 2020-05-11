@@ -14,5 +14,6 @@ RUN yarn
 # Copy files from Host CWD to Container CWD
 COPY . .
 #Expose port and start application
-EXPOSE 8080
+EXPOSE 8000
 CMD ["nodemon", "./app.js"]
+# CMD ["yarn", "start"] # for Prod Env
