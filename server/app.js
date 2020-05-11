@@ -21,10 +21,19 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
 /// Connection to MongoDB 
+async function connectWithRetry(mongoUrl) {
+  try {
+    await mongoose.connect(mongoUrl, { useNewUrlParser: true });
+  }
+  catch (err) {
+    console.error('\n\nFailed to connect to MongoDB on startup - retrying in 5 sec\n', err);
+    setTimeout(() => {connectWithRetry(mongoUrl)}, 5000);
+  }
+};
 if(isProduction){
-  mongoose.connect(process.env.MONGODB_URI);
+  connectWithRetry(process.env.MONGODB_URI);
 } else {
-  mongoose.connect('mongodb://localhost:27017', { user: 'root', pass: 'example', useNewUrlParser: true });
+  connectWithRetry('mongodb://root:example@localhost:27017');
   mongoose.set('debug', true);
 }
 

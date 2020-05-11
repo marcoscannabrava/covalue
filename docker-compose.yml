@@ -2,6 +2,21 @@
 version: '3.1'
 
 services:
+  frontend:
+    build: ./client
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+  
+  backend:
+    build: ./server
+    volumes: # mount ./server to /app for nodemon in development
+      - ./server:/app
+    ports:
+      - 8080:8080 # change to 80:80 in production
+    depends_on:
+      - mongo
 
   mongo:
     image: mongo
@@ -22,3 +37,5 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
+    depends_on:
+      - mongo
