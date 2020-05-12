@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import axios from 'axios';
 
+const API_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8000" : "http://localhost:8080"
+
 function AccRecordsTable(props) {
   if (props.records.length > 0) {
     return (
@@ -74,7 +76,7 @@ export class AccRecords extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8000/api/base")
+    axios.get(API_URL+"/api/base")
     .then(res => {
       console.log('server response: ', res);
       this.setState({records: res.data.records});
