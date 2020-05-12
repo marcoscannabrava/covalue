@@ -1,16 +1,25 @@
 # Startup Script for Google Compute Engine VM
-# install MongoDB, Git, NodeJS, Nginx
-sudo apt update && sudo apt install mongodb git nodejs
+# install Git, NodeJS
+sudo apt update && sudo apt install -y git nodejs
+
 # install Yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update && sudo apt install yarn
+sudo apt update && sudo apt install -y yarn
+
+# install MongoDB
+wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo systemctl start mongod
+
 # install Nginx
 sudo apt install curl gnupg2 ca-certificates lsb-release
 echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
   | sudo tee /etc/apt/sources.list.d/nginx.list
 curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
-sudo apt update && sudo apt install nginx
+sudo apt update && sudo apt install -y nginx
 
 # Configure Nginx and reload it
 sudo su -
