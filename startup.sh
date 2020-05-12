@@ -40,7 +40,8 @@ nginx -s reload
 
 # clone repo
 # gcloud source repos clone [REPO_NAME] --project=[PROJECT_NAME]
-git clone git@github.com:marcoscannabrava/covalue.git
+cd /
+git clone git@github.com:marcoscannabrava/covalue.git covalue
 cd covalue
 # install dependencies
 cd client/ && yarn --prod && yarn build
