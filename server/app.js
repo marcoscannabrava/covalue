@@ -3,7 +3,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     logger = require('morgan'),
     cors = require('cors'),
-    session = require('express-session'),
+    // session = require('express-session'),
     mongoose = require('mongoose'),
     { errorCatch, devErrorHandler, prodErrorHandler } = require('./errorHandlers');
 
@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/build')));
-app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
+// app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
 /// Connection to MongoDB
 let options = {
