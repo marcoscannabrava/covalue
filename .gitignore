@@ -12,6 +12,7 @@
 
 # Ignore .env file containing credentials.
 */.env*
+server/ecosystem.config.js
 
 # Logs
 */logs

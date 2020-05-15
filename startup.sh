@@ -66,19 +66,8 @@ cd ../server && yarn --prod && yarn start
 #   location / {}
 # }" > default
 
-# Another Default File options for NGINX - Not working
-# echo "
-# server {
-#   listen 80 default_server;
-#   listen [::]:80 default_server;
-#   root /covalue/;
-#   server_name _;
-#   location / {
-#     proxy_pass http://localhost:8080/;
-#   }
-# }" > default
 
-# Another Default File options for NGINX - Depends on SSL
+# Another Default File options for NGINX - Depends on SSL?
 # echo "
 # server {
 #         listen 80;
@@ -106,28 +95,29 @@ cd ../server && yarn --prod && yarn start
 # }
 # " > default
 
-echo "
-server {
-  listen 80 default_server;
-  listen [::]:80 default_server;
+# echo "
+# server {
+#   listen 80 default_server;
+#   listen [::]:80 default_server;
 
-  server_name _;
+#   server_name _;
 
-  location / {
-    proxy_pass http://localhost:8080/;
-  }
-}
+#   location / {
+#     proxy_pass http://localhost:8080/;
+#   }
+# }
 
-server {
-  listen 443 ssl;
-  server_name _;
+# server {
+#   listen 443 ssl;
+#   server_name _;
 
-  location /  {
-    proxy_pass http://localhost:8080/;
-  }
-}
-" > default
+#   location /  {
+#     proxy_pass http://localhost:8080/;
+#   }
+# }
+# " > default
 
 
 # -- Important Info
 # sudo su # gets root access in VM instance - no pswd required
+# new additions
