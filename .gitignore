@@ -24,6 +24,7 @@ server/ecosystem.config.js
 # files storage folder
 server/public/files
 cache/
+trash/
 
 # vscode debug config
 server/.vscode

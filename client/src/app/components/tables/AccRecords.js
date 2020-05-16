@@ -5,7 +5,7 @@ import axios from 'axios';
 const API_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8000" : "http://localhost:8080"
 
 function AccRecordsTable(props) {
-  if (props.records.length > 0) {
+  if (props.records && props.records.length > 0) {
     return (
       <div>
         <div className="page-header">

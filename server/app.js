@@ -21,9 +21,9 @@ app.use(cookieParser());
 
 // Serve React Frontend
 app.use(express.static(path.join(__dirname, '../client/build')));
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
+// app.get('*', function (req, res) {
+//   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+// });
 
 /// Connection to MongoDB
 let options = {
@@ -33,7 +33,8 @@ let options = {
 if(isProduction){
   mongoose.connect(process.env.MONGODB_URI, options).catch(err => console.log('\n\nError on Connecting to MongoDB (Production Environment):\n', err));
 } else {
-  mongoose.connect('mongodb://root:example@mongo:27017', options).catch(err => console.log('\n\nError on Connecting to MongoDB (Dev Environment):\n', err));
+  // if in container use: 'mongodb://root:example@mongo:27017'
+  mongoose.connect('mongodb://root:example@localhost:27017', options).catch(err => console.log('\n\nError on Connecting to MongoDB (Dev Environment):\n', err));
   mongoose.set('debug', true);
 }
 

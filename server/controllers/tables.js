@@ -50,9 +50,10 @@ const upload = (req, res) => {
 }
 
 const listAccRecords = (req, res) => {
+  console.log('\n\nConnection: \n', mongoose.connection)
   AccRecord.find({}, (err, docs) => {
     if (!!err) return res.status(500).send({ error: err })
-
+    console.log('\n\nConnection: \n', mongoose.connection)
     return res.status(200).send({ records: docs })
   })
 }
