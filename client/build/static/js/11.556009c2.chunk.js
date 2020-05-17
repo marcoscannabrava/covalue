@@ -1,0 +1,2 @@
+(window["webpackJsonpcovalue-app"]=window["webpackJsonpcovalue-app"]||[]).push([[11],{272:function(n,e,t){"use strict";t.r(e),t.d(e,"BlankPage",(function(){return i}));var a=t(6),u=t(7),c=t(9),r=t(8),o=t(0),p=t.n(o),i=function(n){Object(c.a)(t,n);var e=Object(r.a)(t);function t(){return Object(a.a)(this,t),e.apply(this,arguments)}return Object(u.a)(t,[{key:"render",value:function(){return p.a.createElement("div",null)}}]),t}(o.Component);e.default=i}}]);
+//# sourceMappingURL=11.556009c2.chunk.js.map
