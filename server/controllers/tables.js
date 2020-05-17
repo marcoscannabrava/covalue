@@ -6,7 +6,7 @@ var AccRecord = mongoose.model('AccRecord');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/files')
+    cb(null, path.join(__dirname, '../public/files/'))
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname )
@@ -19,8 +19,10 @@ const upload = (req, res) => {
     if (err instanceof multer.MulterError) {
       return res.status(500).json(err)
     } else if (err) {
+      console.log('err2', err);
       return res.status(500).json(err)
     }
+    
     let wb = XLSX.readFile(path.join(__dirname, '../public/files/'+req.file.filename));
     let ws = wb.Sheets[wb.SheetNames[0]];
     let records = XLSX.utils.sheet_to_json(ws);

@@ -74,7 +74,11 @@ export class AccRecords extends Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     axios.get("/api/base")
+=======
+    axios.get(API_URL+"/api/base")
+>>>>>>> refs/rewritten/master-2
     .then(res => {
       console.log('server response: ', res);
       this.setState({records: res.data.records});
