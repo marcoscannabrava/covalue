@@ -5,14 +5,16 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore build.
-*/build/
+client/build/
 
 # Ignore all logfiles and tempfiles.
 */node_modules/
+node_modules/
 
 # Ignore .env file containing credentials.
 */.env*
-server/ecosystem.config.js
+.env*
+ecosystem.config.js
 
 # Logs
 */logs
@@ -22,12 +24,12 @@ server/ecosystem.config.js
 */yarn-error.log*
 
 # files storage folder
-server/public/files
+public/files
 cache/
 trash/
 
 # vscode debug config
-server/.vscode
+.vscode
 
 # Ignore Mac and Linux file system files
 *.swp
