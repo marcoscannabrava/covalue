@@ -6,7 +6,7 @@ var AccRecord = mongoose.model('AccRecord');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/files')
+    cb(null, path.join(__dirname, '../public/files/'))
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname )
@@ -17,12 +17,9 @@ var storage = multer.diskStorage({
 const upload = (req, res) => {
   multer({ storage: storage }).single('file')(req, res, function (err) {
     if (err instanceof multer.MulterError) {
-      console.log('err1', err);
-      console.log('\n\nPATH:\n', path.join(__dirname, '../public/files/'));
       return res.status(500).json(err)
     } else if (err) {
       console.log('err2', err);
-      console.log('\n\nPATH:\n', path.join(__dirname, '../public/files/'));
       return res.status(500).json(err)
     }
     
