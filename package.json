@@ -1,6 +1,11 @@
 {
+  "name": "covalue",
+  "engines": {
+    "node": "12.16.x",
+    "yarn": "1.22.x"
+  },
   "scripts": {
-    "heroku-prebuild": "cd client && npm install && npm run build && cd ../server && npm install",
-    "start": "cd server && npm run start"
+    "build": "cd client && yarn && yarn build && cd ../server && yarn",
+    "start": "yarn start"
   }
 }
