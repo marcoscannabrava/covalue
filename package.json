@@ -5,7 +5,6 @@
     "yarn": "1.22.x"
   },
   "scripts": {
-    "build": "cd client && yarn && yarn build && cd ../server && yarn",
-    "start": "yarn start"
+    "build": "cd client && yarn && yarn build && cd ../server && yarn && yarn start"
   }
 }
