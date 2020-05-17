@@ -7,7 +7,7 @@ module.exports = {
         'NODE_ENV': 'production',
         // 'MONGODB_URI': 'mongodb://root:example@mongo:27017',
         // 'MONGODB_URI': 'mongodb+srv://covalue:addingvalue@covalue-zxcf7.gcp.mongodb.net/test?retryWrites=true&w=majority',
-        'MONGODB_URI': 'mongodb://covalue:addingvalue@localhost:27017',
+        'MONGODB_URI': `mongodb://${process.env.HEROKU_MONGODB_USER}:${process.env.HEROKU_MONGODB_PSWD}@ds161860.mlab.com:61860/heroku_xx204trv`,
         'PORT': '8080',
         'SECRET': 'secret'
       }
