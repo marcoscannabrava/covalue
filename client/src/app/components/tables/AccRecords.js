@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import axios from 'axios';
 
-const API_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8000" : "http://localhost:8080"
+const API_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8000" : ""
 
 function AccRecordsTable(props) {
   if (props.records && props.records.length > 0) {
