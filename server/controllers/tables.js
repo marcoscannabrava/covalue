@@ -21,7 +21,7 @@ const upload = (req, res) => {
     } else if (err) {
       return res.status(500).json(err)
     }
-    let wb = XLSX.readFile(path.join(__dirname, '../public/files/'+req.file.filename));
+    let wb = XLSX.readFile(path.join(__dirname, '../../public/files/'+req.file.filename));
     let ws = wb.Sheets[wb.SheetNames[0]];
     let records = XLSX.utils.sheet_to_json(ws);
 

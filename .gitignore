@@ -23,6 +23,7 @@ server/ecosystem.config.js
 
 # files storage folder
 server/public/files
+public/files
 cache/
 trash/
 
