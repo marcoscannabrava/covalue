@@ -17,12 +17,14 @@ var storage = multer.diskStorage({
 const upload = (req, res) => {
   multer({ storage: storage }).single('file')(req, res, function (err) {
     if (err instanceof multer.MulterError) {
+      console.log('err1', err);
       return res.status(500).json(err)
     } else if (err) {
+      console.log('err2', err);
       return res.status(500).json(err)
     }
     
-    let wb = XLSX.readFile(path.join(__dirname, '../../public/files/'+req.file.filename));
+    let wb = XLSX.readFile(path.join(__dirname, '../public/files/'+req.file.filename));
     let ws = wb.Sheets[wb.SheetNames[0]];
     let records = XLSX.utils.sheet_to_json(ws);
 
