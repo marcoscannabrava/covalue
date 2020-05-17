@@ -33,7 +33,6 @@ let options = {
 if(isProduction){
   mongoose.connect(process.env.MONGODB_URI, options).catch(err => console.log('\n\nError on Connecting to MongoDB (Production Environment):\n', err));
 } else {
-  // if in container use: 'mongodb://root:example@mongo:27017'
   mongoose.connect('mongodb://root:example@localhost:27017', options).catch(err => console.log('\n\nError on Connecting to MongoDB (Dev Environment):\n', err));
   mongoose.set('debug', true);
 }
