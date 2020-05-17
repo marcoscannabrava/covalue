@@ -6,8 +6,6 @@ import axios from 'axios';
 
 import { FileDrop } from 'react-file-drop';
 
-const API_URL = process.env.NODE_ENV === 'development' ? "http://localhost:8000" : "http://localhost:8080"
-
 export class FileUpload extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +16,7 @@ export class FileUpload extends Component {
   sendFile(file) {
     const data = new FormData();
     data.append('file', file);
-    axios.post(API_URL+"/api/upload", data, { // receive two parameter endpoint url ,form data 
+    axios.post("/api/upload", data, { // receive two parameter endpoint url ,form data 
       }).then(res => { // then print response status
         console.log(res)
       })
