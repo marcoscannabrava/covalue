@@ -18,11 +18,11 @@ const upload = (req, res) => {
   multer({ storage: storage }).single('file')(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       console.log('err1', err);
-      console.log('\n\nPATH:\n', path.join(__dirname, '../public/files/'+req.file.filename));
+      console.log('\n\nPATH:\n', path.join(__dirname, '../public/files/'));
       return res.status(500).json(err)
     } else if (err) {
       console.log('err2', err);
-      console.log('\n\nPATH:\n', path.join(__dirname, '../public/files/'+req.file.filename));
+      console.log('\n\nPATH:\n', path.join(__dirname, '../public/files/'));
       return res.status(500).json(err)
     }
     
