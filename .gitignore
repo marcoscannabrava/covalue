@@ -22,8 +22,6 @@ server/ecosystem.config.js
 */yarn-error.log*
 
 # files storage folder
-server/public/files
-public/files
 cache/
 trash/
 
