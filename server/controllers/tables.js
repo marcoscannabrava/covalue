@@ -19,7 +19,6 @@ const upload = (req, res) => {
     if (err instanceof multer.MulterError) {
       return res.status(500).json(err)
     } else if (err) {
-      console.log('err2', err);
       return res.status(500).json(err)
     }
     
