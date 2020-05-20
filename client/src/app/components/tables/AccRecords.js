@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
+import Spinner from '../../shared/Spinner';
 
 import axios from 'axios';
 
@@ -69,22 +70,52 @@ export class AccRecords extends Component {
     super(props);
 
     this.state = {
-      records: []
+      loader: true,
+      records: [],
+      fetchError: null
     };
   }
 
   componentDidMount() {
-    axios.get("/api/base")
+    axios.get("/api/base", {timeout: 10000})
     .then(res => {
       console.log('server response: ', res);
-      this.setState({records: res.data.records});
+      this.setState({records: res.data.records, loader: false});
+    }).catch((error) => {
+      if (error.response) {
+        // Request made. Server responded with an error status code.
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        this.setState({fetchError: error});
+      } else if (error.request) {
+        // Request made. No response from server
+        console.log(error.request);
+        this.setState({fetchError: error});
+      }
+      this.setState({loader: false});
     })
   }
 
   render() {
+    if (this.state.loader) {
+      return <Spinner />
+    } else if (this.state.fetchError !== null) {
+      return (
+        <div className="card card-statistics">
+          <div className="card-body">
+            <h3 className="font-weight-medium text-right mb-0 text-dark">
+              Sorry.
+              {!!this.state.fetchError.request ? 
+              " The server didn't respond." : " The server responded with an error."}
+            </h3>
+          </div>
+        </div>
+      )
+    } else {
     return (
       <AccRecordsTable records={this.state.records} />
-    )
+    )}
   }
 }
 
