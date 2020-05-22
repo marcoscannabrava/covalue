@@ -30,13 +30,15 @@ let options = {
 if(isProduction){
   mongoose.connect(process.env.MONGODB_URI, options).catch(err => console.log('\n\nError on Connecting to MongoDB (Production Environment):\n', err));
 } else {
-  mongoose.connect('mongodb://root:example@localhost:27017', options).catch(err => console.log('\n\nError on Connecting to MongoDB (Dev Environment):\n', err));
+  // use @localhost:27017 if running backend outside container and @mongo:27017 if running it inside container
+  mongoose.connect('mongodb://root:example@mongo:27017', options).catch(err => console.log('\n\nError on Connecting to MongoDB (Dev Environment):\n', err));
   mongoose.set('debug', true);
 }
 
 // Models
 require('./models/User');
 require('./models/AccRecord');
+require('./models/DreRow');
 
 // Routes
 app.use(require('./routes'));

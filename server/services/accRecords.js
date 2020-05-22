@@ -3,6 +3,10 @@ var path = require('path');
 var XLSX = require('xlsx');
 var mongoose = require('mongoose');
 var AccRecord = mongoose.model('AccRecord');
+var DreRow = mongoose.model('DreRow');
+
+var { createDreRows } = require('./dre');
+
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -17,9 +21,9 @@ var storage = multer.diskStorage({
 const upload = (req, res) => {
   multer({ storage: storage }).single('file')(req, res, function (err) {
     if (err instanceof multer.MulterError) {
-      return res.status(500).json(err)
+      return res.status(500).json({response:'error', ...err})
     } else if (err) {
-      return res.status(500).json(err)
+      return res.status(500).json({response:'error', ...err})
     }
     
     let wb = XLSX.readFile(path.join(__dirname, '../public/files/'+req.file.filename));
@@ -40,12 +44,12 @@ const upload = (req, res) => {
     })
 
     AccRecord.insertMany(records, { ordered: false }, (err, docs) => {
-      if (!!err) return res.status(206).send({ file: req.file, error: err, rows: docs.length })
+      if (!!err) return res.status(206).send({ response: 'error', error: err, rows: docs.length })
 
-      return res.status(200).send({ file: req.file, rows: docs.length })
+      return res.status(200).send({ response: 'success', rows: docs.length })
     })
 
-    // [TODO] call method to create KPIs and DRE Models ?
+    createDreRows(records);
 
   })
 }
