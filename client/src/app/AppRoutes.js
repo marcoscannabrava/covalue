@@ -2,7 +2,7 @@ import React, { Component,Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './user-pages/Home.jsx';
 
-import Spinner from '../app/shared/Spinner';
+import Spinner from './shared/Spinner';
 
 const Dashboard = lazy(() => import('./components/dashboard/Dashboard.jsx'));
 const FileUpload = lazy(() => import('./components/file_upload/FileUpload.jsx'));

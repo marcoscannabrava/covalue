@@ -24,9 +24,10 @@ server/ecosystem.config.js
 # files storage folder
 cache/
 trash/
+server/public
 
 # vscode debug config
-server/.vscode
+.vscode
 
 # Ignore Mac and Linux file system files
 *.swp
