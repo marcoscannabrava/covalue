@@ -7,8 +7,6 @@ import axios from 'axios';
 import { FileDrop } from 'react-file-drop';
 import { Alert } from 'react-bootstrap';
 import Spinner from '../../shared/Spinner';
-// import Alert from '../../shared/Alert';
-
 
 class FileUpload extends Component {
   constructor(props) {
