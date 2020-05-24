@@ -31,8 +31,9 @@ const upload = (req, res) => {
     let records = XLSX.utils.sheet_to_json(ws);
 
     records = records.map((record) => {
+      let date = record['Mês'].split('/');
       return new AccRecord({
-        month: new Date(record['Mês']),
+        month: new Date(date[2], date[1]-1, date[0]),
         account: record['CONTA'],
         g: record['G'],
         description: record['DESCRIÇÃO'],
@@ -43,6 +44,7 @@ const upload = (req, res) => {
       })
     })
 
+    console.log('\n\n Inserting Records in AccRecords Collection...\n\n');
     AccRecord.insertMany(records, { ordered: false }, (err, docs) => {
       if (!!err) return res.status(206).send({ response: 'error', error: err, rows: docs.length })
 
