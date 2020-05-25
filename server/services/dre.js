@@ -8,7 +8,7 @@ const listDreRows = (req, res) => {
   })
 }
 
-const createDreRows = async (accRecords) => { // [TO-DO] - not yet taking into account the fact base is cumulative
+const createDreRows = (accRecords) => { // [TO-DO] - not yet taking into account the fact base is cumulative
 
   const calcRows = [
     'Receita Bruta',
@@ -30,10 +30,11 @@ const createDreRows = async (accRecords) => { // [TO-DO] - not yet taking into a
   let hash = {};
   let months = [];
   accRecords.forEach((currVal) => {
+    console.log('\n\ncurrVal:\n', currVal)
     let hashMonth = Date.parse(currVal.month);  // dehydrate currVal.month to number
     if (!months.includes(hashMonth)) months.push(hashMonth);
     if (calcRows.includes(currVal.classPL)) {
-      if (hash[`${currVal.classPL}-${hashMonth}`]) {
+      if (hash[`${currVal.classPL}-${hashMonth}`] !== undefined) {
         hash[`${currVal.classPL}-${hashMonth}`] += currVal.value;
       } else {
         hash[`${currVal.classPL}-${hashMonth}`] = 0;
@@ -55,10 +56,7 @@ const createDreRows = async (accRecords) => { // [TO-DO] - not yet taking into a
     }))
   }
 
-  return await DreRow.insertMany(dreRecords, { ordered: false }, (err, docs) => {
-    if (!!err) return { status: 206, error: err, msg: 'Error generating DreRows Collection. Partially populated. ' }
-    return { status: 200, msg: 'DreRows Insertion Ok. ' }
-  })
+  return DreRow.insertMany(dreRecords, { ordered: false })
 }
 
 module.exports = {

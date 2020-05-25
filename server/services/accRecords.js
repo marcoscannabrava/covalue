@@ -45,29 +45,23 @@ const upload = (req, res) => {
 
     
     const populateModels = async (records, cb) => {
-      // console.log('\n\n Inserting Records in AccRecords Collection...');
-      const accRecordResponse = (async () => {
-        return await AccRecord.insertMany(records, { ordered: false }, (err, docs) => {
-          if (!!err) return { status: 206, error: err, msg: 'Error inserting into AccRecords Collection. Partially populated. ' }
-          return { status: 200, msg: 'AccRecords Insertion Ok. ' }
-        })
-      })();
-
-      // console.log('\n\n Generating DreRows Collection...');
+      
+      const accRecordResponse = new Promise((a,b) => {}) // AccRecord.insertMany(records, { ordered: false });
+      
       const dreRowResponse = createDreRows(records);
     
-      const responses = Promise.all([accRecordResponse, dreRowResponse])
+      //   if (!!err) return { status: 206, error: err, msg: 'Error generating DreRows Collection. Partially populated. ' }
+      //   return { status: 200, msg: 'DreRows Insertion Ok. ' }
+      // if (!!err) return { status: 206, error: err, msg: 'Error inserting into AccRecords Collection. Partially populated. ' }
+      // return { status: 200, msg: 'AccRecords Insertion Ok. ' }
       
-      console.log('\n\n')
-      console.log('accRecordResponse: ', accRecordResponse)
-      console.log('dreRowResponse: ', dreRowResponse)
-      console.log('responses: ', responses)
+      const responses = await Promise.all([accRecordResponse, dreRowResponse])
       
       cb(accRecordResponse, dreRowResponse)
     };
 
     const cb = (accRecordResponse, dreRowResponse) => {
-      if (accRecordResponse.status === 200 && dreRowResponse.status === 200) {
+      if (accRecordResponse.length > 0 && dreRowResponse.length > 0) {
         return res.status(200).send({response: 'success', msg: 'accRecords and dreRows populated'})
       } else {
         return res.status(206).send({ response: 'error', msg: accRecordResponse.msg + dreRowResponse.msg })
@@ -76,12 +70,6 @@ const upload = (req, res) => {
 
     populateModels(records, cb);
     
-    // console.log('\n\n')
-    // console.log('outside asyn function')
-    // console.log('accRecordResponse: ', accRecordResponse)
-    // console.log('dreRowResponse: ', dreRowResponse)
-  
-    // console.log('end of test')
   })
 }
 
