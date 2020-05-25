@@ -8,7 +8,7 @@ const listDreRows = (req, res) => {
   })
 }
 
-const createDreRows = (accRecords) => { // [TO-DO]
+const createDreRows = async (accRecords) => { // [TO-DO] - not yet taking into account the fact base is cumulative
 
   const calcRows = [
     'Receita Bruta',
@@ -30,34 +30,35 @@ const createDreRows = (accRecords) => { // [TO-DO]
   let hash = {};
   let months = [];
   accRecords.forEach((currVal) => {
-    if (!months.includes(currVal.month)) months.push(currVal.month);
+    let hashMonth = Date.parse(currVal.month);  // dehydrate currVal.month to number
+    if (!months.includes(hashMonth)) months.push(hashMonth);
     if (calcRows.includes(currVal.classPL)) {
-      if (hash[`${currVal.classPL}-${currVal.month}`]) { // dehydrate currVal.month to simple month integer?
-        hash[`${currVal.classPL}-${currVal.month}`] += currVal.value;
+      if (hash[`${currVal.classPL}-${hashMonth}`]) {
+        hash[`${currVal.classPL}-${hashMonth}`] += currVal.value;
       } else {
-        hash[`${currVal.classPL}-${currVal.month}`] = 0;
+        hash[`${currVal.classPL}-${hashMonth}`] = 0;
       }
     }
   })
+
+  console.log('\n\nHash:\n')
+  console.log(hash)
 
   let dreRecords = [];
   for (key in hash) {
     let arr = key.split('-');
     dreRecords.push(new DreRow({
-      userId: "",
+      userId: "", // for future feature
       rowName: arr[0],
       value: hash[key],
       month: new Date(arr[1]) // does it work? what is arr[1]?
     }))
   }
-  /*
-  */
 
-  // DreRow.insertMany(rows, { ordered: false }, (err, docs) => {
-  //   if (!!err) return res.status(206).send({ file: req.file, error: err, rows: docs.length })
-
-  //   return res.status(200).send({ file: req.file, rows: docs.length })
-  // })
+  return await DreRow.insertMany(dreRecords, { ordered: false }, (err, docs) => {
+    if (!!err) return { status: 206, error: err, msg: 'Error generating DreRows Collection. Partially populated. ' }
+    return { status: 200, msg: 'DreRows Insertion Ok. ' }
+  })
 }
 
 module.exports = {

@@ -31,9 +31,8 @@ const upload = (req, res) => {
     let records = XLSX.utils.sheet_to_json(ws);
 
     records = records.map((record) => {
-      let date = record['Mês'].split('/');
       return new AccRecord({
-        month: new Date(date[2], date[1]-1, date[0]),
+        month: new Date(Math.round((record['Mês'] - 25569)*86400*1000)),
         account: record['CONTA'],
         g: record['G'],
         description: record['DESCRIÇÃO'],
@@ -44,15 +43,45 @@ const upload = (req, res) => {
       })
     })
 
-    console.log('\n\n Inserting Records in AccRecords Collection...\n\n');
-    AccRecord.insertMany(records, { ordered: false }, (err, docs) => {
-      if (!!err) return res.status(206).send({ response: 'error', error: err, rows: docs.length })
+    
+    const populateModels = async (records, cb) => {
+      // console.log('\n\n Inserting Records in AccRecords Collection...');
+      const accRecordResponse = (async () => {
+        return await AccRecord.insertMany(records, { ordered: false }, (err, docs) => {
+          if (!!err) return { status: 206, error: err, msg: 'Error inserting into AccRecords Collection. Partially populated. ' }
+          return { status: 200, msg: 'AccRecords Insertion Ok. ' }
+        })
+      })();
 
-      return res.status(200).send({ response: 'success', rows: docs.length })
-    })
+      // console.log('\n\n Generating DreRows Collection...');
+      const dreRowResponse = createDreRows(records);
+    
+      const responses = Promise.all([accRecordResponse, dreRowResponse])
+      
+      console.log('\n\n')
+      console.log('accRecordResponse: ', accRecordResponse)
+      console.log('dreRowResponse: ', dreRowResponse)
+      console.log('responses: ', responses)
+      
+      cb(accRecordResponse, dreRowResponse)
+    };
 
-    createDreRows(records);
+    const cb = (accRecordResponse, dreRowResponse) => {
+      if (accRecordResponse.status === 200 && dreRowResponse.status === 200) {
+        return res.status(200).send({response: 'success', msg: 'accRecords and dreRows populated'})
+      } else {
+        return res.status(206).send({ response: 'error', msg: accRecordResponse.msg + dreRowResponse.msg })
+      }
+    }
 
+    populateModels(records, cb);
+    
+    // console.log('\n\n')
+    // console.log('outside asyn function')
+    // console.log('accRecordResponse: ', accRecordResponse)
+    // console.log('dreRowResponse: ', dreRowResponse)
+  
+    // console.log('end of test')
   })
 }
 

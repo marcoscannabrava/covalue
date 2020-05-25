@@ -40,7 +40,7 @@ class FileUpload extends Component {
 
   fileUpload = (files, event=null) => {
     if (event) { event.preventDefault() }
-    let ext = /(?:\.([^.]+))?$/.exec(files[0].name);
+    let ext = /(?:\.([^.]+))?$/.exec(files[0].name)[1];
     if (['xls', 'xlsx', 'xlsm', 'xlsb', 'ods', 'csv', 'txt'].includes(ext)) {
       this.setState({file: files[0], loader: true});
       this.sendFile(files[0]);
