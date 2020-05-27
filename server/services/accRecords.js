@@ -3,7 +3,6 @@ var path = require('path');
 var XLSX = require('xlsx');
 var mongoose = require('mongoose');
 var AccRecord = mongoose.model('AccRecord');
-var DreRow = mongoose.model('DreRow');
 
 var { createDreRows } = require('./dre');
 
@@ -44,32 +43,34 @@ const upload = (req, res) => {
     })
 
     
-    const populateModels = async (records, cb) => {
+    const asyncPopulateModels = async (records) => {
+      const accRecordPromise = AccRecord.insertMany(records, { ordered: false }).then((resolve) => {
+        return { status: 200, msg: 'AccRecords Insertion Ok. ' }
+      }, (reject) => {
+        return { status: 206, error: err, msg: 'Error inserting into AccRecords Collection. Partially populated. ' }
+      })
       
-      const accRecordResponse = new Promise((a,b) => {}) // AccRecord.insertMany(records, { ordered: false });
+      const dreRowPromise = createDreRows(records).then((resolve) => {
+        console.log('resolved');
+        console.log(resolve);
+        return { status: 200, msg: 'DreRows Insertion Ok. ' }
+      }, (reject) => {
+        return { status: 206, error: err, msg: 'Error generating DreRows Collection. Partially populated. ' }
+      })
       
-      const dreRowResponse = createDreRows(records);
-    
-      //   if (!!err) return { status: 206, error: err, msg: 'Error generating DreRows Collection. Partially populated. ' }
-      //   return { status: 200, msg: 'DreRows Insertion Ok. ' }
-      // if (!!err) return { status: 206, error: err, msg: 'Error inserting into AccRecords Collection. Partially populated. ' }
-      // return { status: 200, msg: 'AccRecords Insertion Ok. ' }
-      
-      const responses = await Promise.all([accRecordResponse, dreRowResponse])
-      
-      cb(accRecordResponse, dreRowResponse)
+      const response = await Promise.all([accRecordPromise, dreRowPromise])
+
+      return response
     };
 
-    const cb = (accRecordResponse, dreRowResponse) => {
-      if (accRecordResponse.length > 0 && dreRowResponse.length > 0) {
+    asyncPopulateModels(records).then(([accRecordResponse, dreRowResponse]) => {
+      if (accRecordResponse.status = 200 && dreRowResponse.status > 200) {
         return res.status(200).send({response: 'success', msg: 'accRecords and dreRows populated'})
       } else {
         return res.status(206).send({ response: 'error', msg: accRecordResponse.msg + dreRowResponse.msg })
       }
-    }
+    })
 
-    populateModels(records, cb);
-    
   })
 }
 

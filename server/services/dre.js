@@ -11,7 +11,7 @@ const listDreRows = (req, res) => {
 const createDreRows = (accRecords) => { // [TO-DO] - not yet taking into account the fact base is cumulative
 
   const calcRows = [
-    'Receita Bruta',
+    'Receita bruta',
     'Deduções da receita',
     'Custos',
     'SG&A',
@@ -30,20 +30,16 @@ const createDreRows = (accRecords) => { // [TO-DO] - not yet taking into account
   let hash = {};
   let months = [];
   accRecords.forEach((currVal) => {
-    console.log('\n\ncurrVal:\n', currVal)
     let hashMonth = Date.parse(currVal.month);  // dehydrate currVal.month to number
     if (!months.includes(hashMonth)) months.push(hashMonth);
     if (calcRows.includes(currVal.classPL)) {
       if (hash[`${currVal.classPL}-${hashMonth}`] !== undefined) {
-        hash[`${currVal.classPL}-${hashMonth}`] += currVal.value;
+        hash[`${currVal.classPL}-${hashMonth}`] += parseFloat(currVal.value);
       } else {
         hash[`${currVal.classPL}-${hashMonth}`] = 0;
       }
     }
   })
-
-  console.log('\n\nHash:\n')
-  console.log(hash)
 
   let dreRecords = [];
   for (key in hash) {
@@ -52,9 +48,12 @@ const createDreRows = (accRecords) => { // [TO-DO] - not yet taking into account
       userId: "", // for future feature
       rowName: arr[0],
       value: hash[key],
-      month: new Date(arr[1]) // does it work? what is arr[1]?
+      month: new Date(parseInt(arr[1]))
     }))
   }
+
+  console.log('\n\ndreRecords:\n');
+  console.log(dreRecords.slice(0,20));
 
   return DreRow.insertMany(dreRecords, { ordered: false })
 }
