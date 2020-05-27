@@ -64,7 +64,7 @@ const upload = (req, res) => {
     };
 
     asyncPopulateModels(records).then(([accRecordResponse, dreRowResponse]) => {
-      if (accRecordResponse.status = 200 && dreRowResponse.status > 200) {
+      if (accRecordResponse.status === 200 && dreRowResponse.status === 200) {
         return res.status(200).send({response: 'success', msg: 'accRecords and dreRows populated'})
       } else {
         return res.status(206).send({ response: 'error', msg: accRecordResponse.msg + dreRowResponse.msg })
