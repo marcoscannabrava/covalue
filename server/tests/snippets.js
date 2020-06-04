@@ -24,14 +24,11 @@ async function testPromises() {
   console.log(promiseB);
 
   let [promiseARes, promiseBRes] = await Promise.all([promiseA, promiseB])
-  console.log('Promise A', promiseA);
-  console.log('Promise B', promiseB);
+  console.log('Promise A: ', promiseA);
+  console.log('Promise B: ', promiseB);
 
-  // console.log('responses')
-  // console.log(responses)
-
-  console.log('Promise A Res', promiseARes);
-  console.log('Promise B Res', promiseBRes);
+  console.log('Promise A Res: ', promiseARes);
+  console.log('Promise B Res: ', promiseBRes);
 
 }
 

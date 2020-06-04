@@ -18,6 +18,7 @@ const BlankPage = lazy(() => import('./user-pages/BlankPage'));
 // const BasicElements = lazy(() => import('./components/form-elements/BasicElements'));
 const BasicTable = lazy(() => import('./components/tables/BasicTable'));
 const AccRecords = lazy(() => import('./components/tables/AccRecords'));
+const DreRecords = lazy(() => import('./components/tables/DreRecords'));
 const FontAwesome = lazy(() => import('./icons/FontAwesome'));
 // const ChartJs = lazy(() => import('./components/charts/ChartJs'));
 
@@ -32,6 +33,8 @@ class AppRoutes extends Component {
           <Route exact path="/dashboard" component={ Dashboard } />
           <Route exact path="/upload" component={ FileUpload } />
           <Route path="/tables/base" component={ AccRecords } />
+          <Route path="/tables/dre" component={ DreRecords } />
+
           <Route path="/tables/examples" component={ BasicTable } />
           <Route path="/icons/font-awesome" component={ FontAwesome } />
 

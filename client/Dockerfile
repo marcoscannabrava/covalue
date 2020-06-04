@@ -5,7 +5,7 @@ FROM node:12-alpine
 # Create app directory - Container CWD
 WORKDIR /app
 # Put node_modules on environment variable
-ENV PATH /app/node_modules/.bin:$PATH
+# ENV PATH /app/node_modules/.bin:$PATH
 # Install app dependencies
 # COPY package*.json ./
 # Copy files from Host CWD to Container CWD

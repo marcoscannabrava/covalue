@@ -32,9 +32,14 @@ const createDreRows = (accRecords) => { // [TO-DO] - not yet taking into account
   accRecords.forEach((currVal) => {
     let hashMonth = Date.parse(currVal.month);  // dehydrate currVal.month to number
     if (!months.includes(hashMonth)) months.push(hashMonth);
+  });
+
+  accRecords.forEach((currVal) => {
+    let hashMonth = Date.parse(currVal.month);
     if (calcRows.includes(currVal.classPL)) {
       if (hash[`${currVal.classPL}-${hashMonth}`] !== undefined) {
         hash[`${currVal.classPL}-${hashMonth}`] += parseFloat(currVal.value);
+        // months.forEach((month) => {}); 
       } else {
         hash[`${currVal.classPL}-${hashMonth}`] = 0;
       }

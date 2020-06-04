@@ -129,19 +129,19 @@ class Sidebar extends Component {
               <span className="menu-title">Form Elements</span>
             </Link>
           </li> */}
-          <li className={ this.isPathActive('/tables') ? 'nav-item active' : 'nav-item' }>
-            <div className={ this.state.userPagesMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('userPagesMenuOpen') } data-toggle="collapse">
+          <li className={ this.isPathActive('/tables/base') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/tables/base">
               <i className="mdi mdi-table-large menu-icon"></i>
-              <span className="menu-title">Tables</span>
-              <i className="menu-arrow"></i>
-            </div>
-            <Collapse in={ this.state.userPagesMenuOpen }>
-              <ul className="nav flex-column sub-menu">
-                <li className="nav-item"> <Link className={ this.isPathActive('/tables/base') ? 'nav-link active' : 'nav-link' } to="/tables/base">Base</Link></li>
-                <li className="nav-item"> <Link className={ this.isPathActive('/tables/examples') ? 'nav-link active' : 'nav-link' } to="/tables/examples">Example Tables</Link></li>
-              </ul>
-            </Collapse>
+              <span className="menu-title">Base</span>
+            </Link>
           </li>
+          <li className={ this.isPathActive('/tables/dre') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/tables/dre">
+              <i className="mdi mdi-table-large menu-icon"></i>
+              <span className="menu-title">DRE</span>
+            </Link>
+          </li>
+          
           {/* <li className={ this.isPathActive('/icons') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/icons/font-awesome">
               <i className="mdi mdi-account-box-outline menu-icon"></i>

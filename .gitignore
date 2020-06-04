@@ -11,6 +11,7 @@
 */node_modules/
 
 # Ignore .env file containing credentials.
+.env*
 */.env*
 server/ecosystem.config.js
 
